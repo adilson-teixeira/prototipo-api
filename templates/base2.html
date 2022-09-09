@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Arborização de Monte Alto</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico'%}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+      <!-- Navbar Start -->
+      <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a href="{% url 'pages:home' %}" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="Braão de Monte Alto"></a>       
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:home' %}" ><i class="fas fa-home"> </i>
+                  Home
+                </a>
+                </li>
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'trees:list' %}"><i class="fad fa-trees"> </i>Espécies</a>
+
+                <!--li class="nav-item">
+                  <a class="nav-link" href="#about"><i class="fas fa-users"></i> Sobre Nós</a>
+                </li-->
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'admin:index' %}"><i class="fad fa-user-cog"></i> Administração</a>
+                </li>
+             
+              <li class="nav-item">
+                <div class="btn-container">
+                  <button name="increase-font" id="increase-font" title="Aumentar fonte">A +</button>
+                  <button name="decrease-font" id="decrease-font" title="Diminuir fonte">A -</button>
+              </div>
+              </li>
+              <li class="nav-item">
+              
+           
+        </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- Navbar End -->
+      {% block content %}  {% endblock %}
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top">
+    	<i class="lni-arrow-up"></i>
+    </a>
+    
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+    
+    <!-- jQuery first, then Popper.js, 
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script> 
+       <script src="{% static 'js/form-validator.min.js' %}"></script> 
+           <script src="{% static 'js/contact-form-script.min.js' %}"></script>  
+      
+      then Bootstrap JS -->
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/jquery.nav.js' %}"></script>
+    <script src="{% static 'js/scrolling-nav.js' %}"></script>
+    <script src="{% static '/js/jquery.easing.min.js' %}"></script>  
+    <script src="{% static 'js/main.js' %}"></script>
+ 
+
+    <script type="text/javascript" src="{% static 'js/cookie.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/script-acessib.js' %}"></script>
+    <script src="{% static 'js/script-weather.js' %}"></script>
+    
+      
+  </body>
+</html>
