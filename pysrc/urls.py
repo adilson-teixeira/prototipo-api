@@ -26,6 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("pages.urls")),
     path('trees/', include("trees.urls")),
+    path('auth/', include('rest_framework.urls')),
+    path('api/v1/', include('trees.apiurls'))
+
 ]
 
 if settings.DEBUG: # em produção essa parte devera ser alterada
