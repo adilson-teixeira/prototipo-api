@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'trees.apps.TreesConfig',
     'bootstrap4',
 
+    'django_filters',
+    'rest_framework',
+
 ]
 
 
@@ -173,6 +176,18 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.User" # indica que estou usando meu modelo de usuário
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        #'rest_framework.authentication.TokenAuthentication', #autent. por token
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+        #'rest_framework.permissions.IsAuthenticated', #( apenas autenticados, inclusive leitura)
+    )
+    
+}
 
 
 #django_on_heroku.settings(locals())
