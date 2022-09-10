@@ -1,8 +1,28 @@
 from django.urls import path
 
+from rest_framework.routers import SimpleRouter
+
 app_name = "api"
 
-from .apiviews import SpecieAPIView, SquareAPIView, FamilyAPIView, TreeAPIView, SpeciesAPIView, SquaresAPIView, FamilysAPIView, TreesAPIView
+from .apiviews import (
+    SpecieAPIView, 
+    SquareAPIView, 
+    FamilyAPIView, 
+    TreeAPIView, 
+    SpeciesAPIView, 
+    SquaresAPIView, 
+    FamilysAPIView, 
+    TreesAPIView, 
+    SpecieViewSet, 
+    SquareViewSet, 
+    FamilyViewSet, 
+    TreeViewSet)
+
+router = SimpleRouter()
+router.register('pracas', SquareViewSet)
+router.register('familias', FamilyViewSet)
+router.register('especies', SpecieViewSet)
+router.register('arvores', TreeViewSet)
 
 urlpatterns = [
     path('pracas/', SquaresAPIView.as_view(), name='pracas'),
