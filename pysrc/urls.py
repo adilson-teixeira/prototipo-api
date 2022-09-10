@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from trees.apiurls import router
+
 
 
 
@@ -27,7 +29,8 @@ urlpatterns = [
     path('', include("pages.urls")),
     path('trees/', include("trees.urls")),
     path('auth/', include('rest_framework.urls')),
-    path('api/v1/', include('trees.apiurls'))
+    path('api/v1/', include('trees.apiurls')),
+    path('api/v2/', include(router.urls))
 
 ]
 

@@ -1,8 +1,16 @@
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 
+from rest_framework import viewsets  # API V2
+from rest_framework.decorators import action #API V2
+from rest_framework.response import Response #API V2
+from rest_framework import mixins
+
+from rest_framework import permissions
+
 from .models import Specie, Square, Family, Tree
-from .serializers import SpecieSerializer, SquareSerializer, FamilySerializer, TreeSerializer
+from .serializers import SpecieSerializer, SquareSerializer, FamilySerializer, TreeSerializer, TreedetailSerializer
+from .permissions import EhSuperUser
 
 
 """
@@ -60,7 +68,92 @@ class TreeAPIView(generics.RetrieveUpdateDestroyAPIView):
         return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('tree_pk'))
 
 
-    """def get_object(self): #sobrescrevendo método
-        if self.kwargs.get('curso_pk'):
-            return get_object_or_404(self.get_queryset(), curso_id=self.kwargs.get('curso_pk'), pk=self.kwargs.get('avaliacao_pk'))
-        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('avaliacao_pk'))"""
+"""
+ API V2 - Refatoração
+ 
+"""
+
+class SquareViewSet(viewsets.ModelViewSet):
+    """
+    API Arborização de Monte Alto - Exibindo as Praças
+    """
+    queryset = Square.objects.all()
+    serializer_class = SquareSerializer
+
+    @action(detail=True, methods=['get'])
+    def arvores(self, request, pk=None):
+        square = self.get_object()
+        serializer =  TreedetailSerializer(square.trees.all(), many=True)
+        return Response(serializer.data) 
+
+
+#square = models.ForeignKey(Square, related_name="trees", on_delete=models.CASCADE)#Category
+
+class SpecieViewSet(viewsets.ModelViewSet):
+    """
+    API Arborização de Monte Alto - Exibindo as espécies das árvores
+    """
+    queryset = Specie.objects.all()
+    serializer_class = SpecieSerializer
+
+
+class FamilyViewSet(viewsets.ModelViewSet):
+    """
+    API Arborização de Monte Alto - Exibindo as famílias das árvores
+    """
+    queryset = Family.objects.all()
+    serializer_class = FamilySerializer
+
+
+class TreeViewSet(
+    mixins.ListModelMixin,   
+    mixins.CreateModelMixin,  #post
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,   #put
+    mixins.DestroyModelMixin,  #delete
+    viewsets.GenericViewSet
+    ):
+    """
+    API Arborização de Monte Alto - Exibindo as árvores com seus relacionamentos.
+    """
+    queryset = Tree.objects.all()
+    serializer_class = TreeSerializer
+"""
+    forma de selecionar recursos da view. O ModelViewSet extende de todos os mixins.
+    Reescrevendo dessa forma é possível selecionar qual extender
+"""
+
+"""class SquareViewSet(viewsets.ModelViewSet):
+
+    permission_classes = (
+        EhSuperUser, 
+        permissions.DjangoModelPermissions,
+        )
+    # EhSuperUser => classe criada no arquivo permissions.py
+    # DjangoModelPermissions => permissão local para essa view com DjangoModelPermissions /definidas no admin
+    queryset = Square.objects.all()
+    serializer_class = SquareSerializer
+
+    @action(detail=True, methods=['get'])
+    def trees(self, request, pk=None): #criando rota para trazer avaliações de um curso
+        #implementação necessária/ não coberto pela paginção global no settings
+        #self.pagination_class.page_size = 2 
+        trees = Tree.objects.filter(Square_id=pk)
+        page = self.paginate_queryset(trees)
+
+        if page is not None:
+            serializer = AvaliacaoSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+
+        serializer = AvaliacaoSerializer(avaliacoes, many=True)
+        return Response (serializer.data)
+        
+
+"""
+class SpecieViewSet(viewsets.ModelViewSet):
+    queryset = Specie.objects.all()
+    serializer_class = SpecieSerializer
+
+
+

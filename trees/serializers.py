@@ -4,6 +4,7 @@ from .models import Specie, Square, Family, Tree
 
 
 class SquareSerializer(serializers.ModelSerializer):
+   
     
     class Meta:
         #extra_Kwargs = { para ocultar algum campo }
@@ -36,7 +37,6 @@ class FamilySerializer(serializers.ModelSerializer):
         )
 
 class TreeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Tree
         fields = (
@@ -50,3 +50,20 @@ class TreeSerializer(serializers.ModelSerializer):
             'quantidade'
         )
 
+class TreedetailSerializer(serializers.ModelSerializer):
+    specie = SpecieSerializer(many=False, read_only=True)
+    family = FamilySerializer(many=False, read_only=True)
+    square = SquareSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Tree
+        fields = (
+            'id',
+            'name',
+            'specie',
+            'family',
+            'square',
+            'source',
+            'description',
+            'quantidade'
+        )
