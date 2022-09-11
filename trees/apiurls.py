@@ -1,8 +1,21 @@
 from django.urls import path
 
 from rest_framework.routers import SimpleRouter
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
+    
+
+
+
+
 
 app_name = "api"
+
+
 
 from .apiviews import (
     SpecieAPIView, 
@@ -25,6 +38,11 @@ router.register('especies', SpecieViewSet)
 router.register('arvores', TreeViewSet)
 
 urlpatterns = [
+    #Autentication
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Others endpoints
     path('pracas/', SquaresAPIView.as_view(), name='pracas'),
     path('familias/', FamilysAPIView.as_view(), name='familias'),
     path('especies/', SpeciesAPIView.as_view(), name='especies'),

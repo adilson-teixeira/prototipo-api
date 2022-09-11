@@ -52,6 +52,8 @@ INSTALLED_APPS = [
 
     'django_filters',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_spectacular',
 
 ]
 
@@ -179,14 +181,25 @@ AUTH_USER_MODEL = "users.User" # indica que estou usando meu modelo de usuário
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        #'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         #'rest_framework.authentication.TokenAuthentication', #autent. por token
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
         #'rest_framework.permissions.IsAuthenticated', #( apenas autenticados, inclusive leitura)
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Arborização Monte Alto',
+    'DESCRIPTION': 'Projeto de divulgação da diversidade Arbórea das praças de Monte Alto',
+    'VERSION': '2.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 
