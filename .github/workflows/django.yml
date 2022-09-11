@@ -21,6 +21,6 @@ jobs:
         pip install -r requirements.txt
     - name: Rodar Testes Automáticos
       env:
-        secret_key: ${{secrets.SECRET_KEY}}
+       secret_key: ${{secrets.SECRET_KEY}}
       run: |
           pytest
