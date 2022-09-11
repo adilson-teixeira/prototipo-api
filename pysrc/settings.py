@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -180,8 +179,8 @@ AUTH_USER_MODEL = "users.User" # indica que estou usando meu modelo de usuário
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'rest_framework.authentication.SessionAuthentication', # autent. por sessão
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        #'rest_framework_simplejwt.authentication.JWTAuthentication',
         #'rest_framework.authentication.TokenAuthentication', #autent. por token
     ),
     'DEFAULT_PERMISSION_CLASSES': (
@@ -200,6 +199,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
+
 
 
 #django_on_heroku.settings(locals())
