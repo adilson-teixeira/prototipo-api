@@ -30,3 +30,29 @@ class TreeListView(ListView):
         context["square"] = self.square
         context["squaries"] = Square.display.all()
         return context
+
+
+class SearchListView(ListView):
+    square = None
+    paginate_by = 6 #mudar para 4 depois
+
+    def get_queryset(self):
+        search_string = self.request.GET.get('search_string')
+        #queryset = Tree.display.all()
+
+
+        queryset = Tree.display.filter(name__icontains=search_string)
+
+        
+        square_slug = self.kwargs.get("slug")
+        if square_slug:
+            self.square = get_object_or_404(Square, slug=square_slug)
+            queryset = queryset.filter(square=self.square)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["square"] = self.square
+        context["squaries"] = Square.display.all()
+        return context
