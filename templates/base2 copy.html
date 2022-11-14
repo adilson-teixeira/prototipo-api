@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,18 +43,9 @@
 
                 <!--li class="nav-item">
                   <a class="nav-link" href="#about"><i class="fas fa-users"></i> Sobre Nós</a>
-                </li
+                </li-->
                 <li class="nav-item">
-                  <a class="nav-link" ><i class="fad fa-user-cog"></i>  Pesquisar&nbsp </a>
-                </li>-->
-                <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" method="GET">
-              
-                  <input class="form-control mr-sm-2" type="text" placeholder="Nome popular" autofocus="autofocus" name="search_string" value="{{ request.GET.search_string }}" autocomplete="off">
-                </li>
-                  <li class="nav-item">
-                  <input class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="search/" value="Pesquisar">
-                </form>
+                  <a class="nav-link" href="{% url 'admin:index' %}"><i class="fad fa-user-cog"></i>  Administração</a>
                 </li>
              
               <li class="nav-item">
